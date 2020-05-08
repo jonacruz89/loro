@@ -146,8 +146,7 @@
 
                         <div class="col-md-6">
                             <select name="department" id="department" class="form-control @error('department') is-invalid @enderror" required>
-                                <!-- <option value=""></option> -->
-                                <option value="1">Bogota</option>
+                                <option value=""></option>
                             </select>
 
 
@@ -166,8 +165,7 @@
 
                         <div class="col-md-6">
                             <select name="city" id="city" class="form-control @error('city') is-invalid @enderror" required>
-                                <!-- <option value=""></option> -->
-                                <option value="1">Bogota</option>
+                                <option value=""></option>
                             </select>
 
                             @error('city')
@@ -233,6 +231,39 @@
             </div>
         </div>
     </div>
+    <script>
+        let selectDepartment = document.getElementById('department');
+        let selectCity = document.getElementById('city');
+
+        selectDepartment.addEventListener('change', (e) => {
+            api(`/api/department/${e.target.value}/citie`).then(res => {
+                selectCity.innerHTML = setHtmlSelect(res)
+            });
+        })
+
+        let api = async (url, type = 'GET') => {
+            let response = []
+            switch (type) {
+                case 'GET':
+                    response = await fetch(url).then(res => res.json())
+                    break;
+
+                default:
+                    break;
+            }
+            return response
+        }
+
+        api('/api/department').then(res => {
+            selectDepartment.innerHTML = setHtmlSelect(res)
+        });
+
+        setHtmlSelect = (arr) => {
+            return `<option value="">..Seleccione uno..</option>` + (arr.map(e => {
+                return `<option value="${e.id}">${e.name}</option>`
+            })).join()
+        }
+    </script>
 </body>
 
 </html>

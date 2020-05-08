@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Citie;
 use App\Department;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class DepartmentCitieController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($department)
     {
-        return Department::all();
+        return Citie::where('department_id', $department)->get();
     }
 
     /**
@@ -81,5 +82,10 @@ class DepartmentController extends Controller
     public function destroy(Department $department)
     {
         //
+    }
+
+    public function citie($department)
+    {
+        return Citie::where('department_id', $department)->get();
     }
 }
