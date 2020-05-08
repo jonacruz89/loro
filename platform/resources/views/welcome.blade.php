@@ -88,150 +88,167 @@
             </div>
 
             <div class="links">
-                <form method="POST" action="{{ route('landing.store') }}">
-                    @csrf
 
-                    <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">
-                            Nombre
-                        </label>
-
-                        <div class="col-md-6">
-                            <input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus>
-
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+                <?php
+                if (isset($winner)) {
+                ?>
+                    <div class="alert alert-success">
+                        El usuario ganador es <?= $winner->name . ' ' . $winner->last_name . ' ' . $winner->email ?>
                     </div>
+                <?php
+                } else {
+                ?>
+                    <form method="POST" action="{{ route('landing.store') }}">
+                        @csrf
 
-                    <div class="form-group row">
-                        <label for="last_name" class="col-md-4 col-form-label text-md-right">
-                            Apellido
-                        </label>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">
+                                Nombre
+                            </label>
 
-                        <div class="col-md-6">
-                            <input id="last_name" type="last_name" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autofocus>
+                            <div class="col-md-6">
+                                <input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus>
 
-                            @error('last_name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="identity" class="col-md-4 col-form-label text-md-right">
-                            Cédula
-                        </label>
-
-                        <div class="col-md-6">
-                            <input id="identity" type="identity" class="form-control @error('identity') is-invalid @enderror" name="identity" value="{{ old('identity') }}" required autofocus>
-
-                            @error('identity')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="department" class="col-md-4 col-form-label text-md-right">
-                            Departamento
-                        </label>
-
-                        <div class="col-md-6">
-                            <select name="department" id="department" class="form-control @error('department') is-invalid @enderror" required>
-                                <option value=""></option>
-                            </select>
-
-
-                            @error('department')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="city" class="col-md-4 col-form-label text-md-right">
-                            Ciudad
-                        </label>
-
-                        <div class="col-md-6">
-                            <select name="city" id="city" class="form-control @error('city') is-invalid @enderror" required>
-                                <option value=""></option>
-                            </select>
-
-                            @error('city')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="phone" class="col-md-4 col-form-label text-md-right">
-                            Celular
-                        </label>
-
-                        <div class="col-md-6">
-                            <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autofocus>
-
-                            @error('phone')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">
-                            Correo Electrónico
-                        </label>
-
-                        <div class="col-md-6">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autofocus>
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-6 offset-md-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="habeas" id="habeas" {{ old('habeas') ? 'checked' : '' }} required>
-
-                                <label class="form-check-label" for="habeas">
-                                    Autorizo el tratamiento de mis datos de acuerdo con la finalidad establecida en la política de protección de datos personales
-                                </label>
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Login') }}
-                            </button>
+                        <div class="form-group row">
+                            <label for="last_name" class="col-md-4 col-form-label text-md-right">
+                                Apellido
+                            </label>
+
+                            <div class="col-md-6">
+                                <input id="last_name" type="last_name" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autofocus>
+
+                                @error('last_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                </form>
+
+                        <div class="form-group row">
+                            <label for="identity" class="col-md-4 col-form-label text-md-right">
+                                Cédula
+                            </label>
+
+                            <div class="col-md-6">
+                                <input id="identity" type="identity" class="form-control @error('identity') is-invalid @enderror" name="identity" value="{{ old('identity') }}" required autofocus>
+
+                                @error('identity')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="department" class="col-md-4 col-form-label text-md-right">
+                                Departamento
+                            </label>
+
+                            <div class="col-md-6">
+                                <select name="department" id="department" class="form-control @error('department') is-invalid @enderror" required>
+                                    <option value=""></option>
+                                </select>
+
+
+                                @error('department')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="city" class="col-md-4 col-form-label text-md-right">
+                                Ciudad
+                            </label>
+
+                            <div class="col-md-6">
+                                <select name="city" id="city" class="form-control @error('city') is-invalid @enderror" required>
+                                    <option value=""></option>
+                                </select>
+
+                                @error('city')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">
+                                Celular
+                            </label>
+
+                            <div class="col-md-6">
+                                <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autofocus>
+
+                                @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">
+                                Correo Electrónico
+                            </label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autofocus>
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="habeas" id="habeas" {{ old('habeas') ? 'checked' : '' }} required>
+
+                                    <label class="form-check-label" for="habeas">
+                                        Autorizo el tratamiento de mis datos de acuerdo con la finalidad establecida en la política de protección de datos personales
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                <?php
+                }
+                ?>
+
             </div>
         </div>
     </div>
     <script>
+        let oldDepartment = "{{ old('department') }}"
+        let oldCitie = "{{ old('city') }}"
+
         let selectDepartment = document.getElementById('department');
         let selectCity = document.getElementById('city');
 
@@ -256,6 +273,13 @@
 
         api('/api/department').then(res => {
             selectDepartment.innerHTML = setHtmlSelect(res)
+            if (oldDepartment.length > 0) {
+                selectDepartment.value = oldDepartment
+                api(`/api/department/${oldDepartment}/citie`).then(res => {
+                    selectCity.innerHTML = setHtmlSelect(res)
+                    selectCity.value = oldCitie
+                });
+            }
         });
 
         setHtmlSelect = (arr) => {

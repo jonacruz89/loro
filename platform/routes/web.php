@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $winner = App\Participant::where('winner', '1')->first();
+    return view('welcome', ['winner'=> $winner]);
 });
 
 Auth::routes();

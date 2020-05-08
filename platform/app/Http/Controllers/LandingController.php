@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class LandingController extends Controller
 {
@@ -55,6 +56,10 @@ class LandingController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
         ]);
+
+        Artisan::call('winner:set');
+
+        return redirect('/');
     }
 
     /**
